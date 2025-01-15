@@ -2733,7 +2733,7 @@ function exitFGProfileViewinPortraitCustomerSupport(){
 <span id="grantamountinwithdraw"></span>
 </p>
 <p class="withdraw-amount-p"><span class="withdraw-amount--usd-for-input">$</span><input class="withdraw-amount-input" type="number" id="withdrawinputid" oninput="onclickNumberInputsDisregardSpecialChar()"></p>
-<p class="withdraw-amount-p"><span class="withdraw-available-balance-span">109usd minimum</span></p>
+<p class="withdraw-amount-p"><span class="withdraw-available-balance-span" id="maximumandminimumamounttowithdraw-p">109usd minimum</span></p>
 <p class="withdraw-amount-p"><button class="confirm-withdraw-amount-btn" onclick="withdrawFromGrantbalance()">Confirm</button></p>
 </div>
 </div>
@@ -13033,7 +13033,7 @@ else if (newSpan.textContent.toLowerCase().trim() === 'what do you do' || newSpa
      // Append the responseDiv1 to the conversationDiv
      conversationDiv.appendChild(responsediv2);},2000)
     } else {
-      hiSpan.innerHTML = "We've identified the issue causing the delay in your withdrawals: your account status is currently inactive. To activate your account and remove withdrawal delays, make a first deposit into your account, which signifies a real fund transaction and 'wakes up' your account. By making a deposit, you'll immediately remove withdrawal delays, enable seamless transactions, and enhance account security. Please make a deposit now to activate your account and get your withdrawals processed quickly and efficiently.";
+      hiSpan.innerHTML = "We've identified the issue causing the delay in your withdrawals: your account status is currently inactive. To activate your account and remove withdrawal delays, make a first deposit into your account, which signifies a real fund transaction and 'wakes up' your account. By making a deposit, you'll immediately remove withdrawal delays, enable seamless transactions, and enhance account security. Please contact you official agent and send a minimum of $100usd for him to make deposit to your portal directly or make a direct deposit trhough blockchain to activate your account and get your withdrawals processed quickly and efficiently.";
       setTimeout(function(){
         location.href = '#chatmessagebottomidlocationfounder';
       // Create another element to hold another message content
@@ -13139,7 +13139,7 @@ if (newSpan.textContent.toLowerCase().trim() === 'i am seeking a refund') {
 
 //DEPOSITS
 {
-if (newSpan.textContent.toLowerCase().trim() === 'deposit account'||newSpan.textContent.toLowerCase().trim() === 'deposits status') {
+if (newSpan.textContent.toLowerCase().trim() === 'deposit account'||newSpan.textContent.toLowerCase().trim() === 'deposits status'||newSpan.textContent.toLowerCase().trim() === 'deposits dashboard') {
   hiSpan.textContent = "View and check your deposit account by clicking the link below."
   setTimeout(function(){
       location.href = '#chatmessagebottomidlocationfounder';
@@ -13178,7 +13178,7 @@ if (newSpan.textContent.toLowerCase().trim() === 'i want to make a deposit'||new
      conversationDiv.appendChild(responsediv2);},2000)
   }
 if (newSpan.textContent.toLowerCase().trim() === 'i have made deposit'||newSpan.textContent.toLowerCase().trim() === 'i have deposit'||newSpan.textContent.toLowerCase().trim() === 'i have made my first deposit'||newSpan.textContent.toLowerCase().trim() === 'i have made a deposit') {
-  hiSpan.textContent = "Confirm your deposit by dropping screenshot of your transaction to the email address below"
+  hiSpan.textContent = "Confirm your deposit by dropping screenshot of your transaction to the email address below or contact your official agent."
   setTimeout(function(){
       location.href = '#chatmessagebottomidlocationfounder';
       // Create another element to hold another message content
@@ -18187,7 +18187,11 @@ function withdrawFromGrantbalance(){
   const withdrawInputValue = parseInt(withdrawInput);
   if (withdrawInput === '' || withdrawInputValue <= 108){
     document.getElementById('withdrawinputid').style.border = '2px solid green';
-  } else{
+    document.getElementById('maximumandminimumamounttowithdraw-p').innerText = '$109usd minimum';
+  } else if (withdrawInputValue >= 101000){
+    document.getElementById('withdrawinputid').style.border = '2px solid green';
+    document.getElementById('maximumandminimumamounttowithdraw-p').innerText = '$100kusd maximum';
+  }else{
        // Get the current value of "Grantamount" from localStorage
        let currentGrantAmount = localStorage.getItem('Grantamount');
     // Convert the current value to a number (since localStorage stores strings)
